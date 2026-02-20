@@ -1,0 +1,38 @@
+id: nebula-ui-outage-ingress-misconfiguration
+
+
+description: |
+  [Context]
+  A Kubernetes-based application exposes a Web UI and an API using Ingress.
+  The Web UI is accessed via https://ui.devops.local and currently fails to load correctly.
+  Requests for static assets under `/static/` return errors.
+  The API health endpoint at https://api.devops.local/health continues to return HTTP 200.
+  The root cause of the issue is not documented and must be identified by inspecting the Kubernetes configuration.
+
+  [Task]
+  Restore the web UI so that:
+  - The UI root path loads successfully.
+  - Static UI assets are accessible.
+  - The API remains unaffected.
+
+  The task is complete when all validation endpoints return HTTP 200.
+
+  [Constraints]
+  - Only Kubernetes configuration may be modified.
+  - Application source code must not be changed.
+  - Interactive commands are not allowed.
+  - Changes should be declarative, reproducible, and idempotent.
+
+  [Failure Conditions]
+  - UI or static assets return a non-200 response.
+  - API behavior is altered or becomes unhealthy.
+  - Configuration changes are non-deterministic or manual.
+
+  [Environment]
+  - Namespace: app
+  - UI Ingress: ui-ingress
+  - UI Service: ui-service (port 80)
+
+metadata:
+  category: devops
+  difficulty: medium
